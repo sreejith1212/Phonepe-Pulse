@@ -163,6 +163,7 @@ def transaction_map():
     df_map_transaction = pd.DataFrame(map_transaction_dict)
     df_map_transaction["State"] = df_map_transaction["State"].apply(lambda x : x.replace("-", " "))
     df_map_transaction["State"] = df_map_transaction["State"].apply(lambda x : x.title())
+    df_map_transaction["District"] = df_map_transaction["District"].apply(lambda x : x.title())
     df_map_transaction["Quarter"] = df_map_transaction["Quarter"].apply(lambda x : "Q" + x)
     df_map_transaction['State'] = df_map_transaction['State'].replace({'Andaman & Nicobar Islands': 'Andaman & Nicobar', 'Dadra & Nagar Haveli & Daman & Diu': 'Dadra and Nagar Haveli and Daman and Diu'})    
 
@@ -220,6 +221,7 @@ def user_map():
     df_map_user = pd.DataFrame(map_user_dict)
     df_map_user["State"] = df_map_user["State"].apply(lambda x : x.replace("-", " "))
     df_map_user["State"] = df_map_user["State"].apply(lambda x : x.title())
+    df_map_user["District"] = df_map_user["District"].apply(lambda x : x.title())
     df_map_user["Quarter"] = df_map_user["Quarter"].apply(lambda x : "Q" + x)
     df_map_user['State'] = df_map_user['State'].replace({'Andaman & Nicobar Islands': 'Andaman & Nicobar', 'Dadra & Nagar Haveli & Daman & Diu': 'Dadra and Nagar Haveli and Daman and Diu'})    
 
@@ -302,6 +304,7 @@ def top_transaction():
 
     df_top_district_transaction["State"] = df_top_district_transaction["State"].apply(lambda x : x.replace("-", " "))
     df_top_district_transaction["State"] = df_top_district_transaction["State"].apply(lambda x : x.title())
+    df_top_district_transaction["District"] = df_top_district_transaction["District"].apply(lambda x : x.title())
     df_top_district_transaction["Quarter"] = df_top_district_transaction["Quarter"].apply(lambda x : "Q" + x)
     df_top_district_transaction['State'] = df_top_district_transaction['State'].replace({'Andaman & Nicobar Islands': 'Andaman & Nicobar', 'Dadra & Nagar Haveli & Daman & Diu': 'Dadra and Nagar Haveli and Daman and Diu'})
 
@@ -395,6 +398,7 @@ def top_user():
 
     df_top_district_user["State"] = df_top_district_user["State"].apply(lambda x : x.replace("-", " "))
     df_top_district_user["State"] = df_top_district_user["State"].apply(lambda x : x.title())
+    df_top_district_user["District"] = df_top_district_user["District"].apply(lambda x : x.title())
     df_top_district_user["Quarter"] = df_top_district_user["Quarter"].apply(lambda x : "Q" + x)
     df_top_district_user['State'] = df_top_district_user['State'].replace({'Andaman & Nicobar Islands': 'Andaman & Nicobar', 'Dadra & Nagar Haveli & Daman & Diu': 'Dadra and Nagar Haveli and Daman and Diu'})    
 
