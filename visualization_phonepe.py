@@ -5,6 +5,7 @@ import plotly.express as px
 import pandas as pd
 
 
+# plot geo visualization transaction data
 def plot_map_transaction(result_df, year, quarter):
 
     map_transaction_df = result_df.groupby(["State", "Year", "Quarter"]).agg({'Transaction Amount': 'sum', 'Transaction Count': 'sum'}).reset_index()
@@ -22,6 +23,7 @@ def plot_map_transaction(result_df, year, quarter):
     fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0},geo=dict(bgcolor='#002b2b'),height=700, width=1300)
     return fig, map_transaction_selected_df
 
+# plot geo visualization user data
 def plot_map_user(result_df, year, quarter):
 
     map_user_df = result_df.groupby(["State", "Year", "Quarter"]).agg({'Registred Users': 'sum', 'App Opens': 'sum'}).reset_index()
@@ -68,12 +70,14 @@ if __name__ == "__main__":
     password = '12121995' 
     dbname = 'Phonepe_Pulse'
 
+    # connect to required sql database
     connection = pymysql.connect(host=host, user=user, password=password, db=dbname)
     cursor = connection.cursor()
 
     # set app page layout type
     st.set_page_config(layout="wide")
 
+    # create sidebar
     with st.sidebar:        
         page = option_menu(
                             menu_title='Phonepe Pulse',
@@ -200,6 +204,7 @@ if __name__ == "__main__":
             top_user_pincode = result_df.loc[:, ['Pincode', 'Registered Users']]
             tab5.dataframe(top_user_pincode, use_container_width=True, hide_index=True)
 
+    # page contains different facts about the data
     if page == "Q & A":
         
         st.header(":green[_Insights From the Phonepe Data_] :bulb:")

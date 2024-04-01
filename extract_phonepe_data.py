@@ -6,8 +6,8 @@ import json
 import pandas as pd
 import pymysql
 
-
-def aggregated_transaction():
+# extract aggregated transaction data and save to database
+def aggregated_transaction(connection, cursor):
     
     agg_transaction_dict = {"State":[], "Year":[],"Quarter":[],"Transaction Type":[], "Transaction Count":[], "Transaction Amount":[]}
     states_path="pulse/data/aggregated/transaction/country/india/state"
@@ -63,8 +63,8 @@ def aggregated_transaction():
         cursor.execute(sql, val)
         connection.commit()
 
-
-def aggregated_user():
+# extract aggregated user data and save to database
+def aggregated_user(connection, cursor):
 
     agg_user_dict = {"State":[], "Year":[],"Quarter":[],"Brand":[], "Count":[], "Percentage":[]}
     states_path="pulse/data/aggregated/user/country/india/state"
@@ -122,8 +122,8 @@ def aggregated_user():
         cursor.execute(sql, val)
         connection.commit()
 
-
-def transaction_map():
+# extract total transaction data at the State and District levels and save to database
+def transaction_map(connection, cursor):
   
     map_transaction_dict = {"State":[], "Year":[], "Quarter":[], "District":[], "Transaction Count":[], "Transaction Amount":[]}
     states_path="pulse/data/map/transaction/hover/country/india/state"
@@ -181,8 +181,8 @@ def transaction_map():
         cursor.execute(sql, val)
         connection.commit()
 
-
-def user_map():
+# extract total user data at the State and District levels and save to database
+def user_map(connection, cursor):
     
     map_user_dict = {"State":[], "Year":[],"Quarter":[],"District":[], "Registered Users":[], "App Opens":[]}
     states_path="pulse/data/map/user/hover/country/india/state"
@@ -239,7 +239,8 @@ def user_map():
         cursor.execute(sql, val)
         connection.commit()
 
-def top_transaction():
+# extract top transaction data and save to database
+def top_transaction(connection, cursor):
 
     top_transaction_district_dict = {"State":[], "Year":[],"Quarter":[],"District":[], "Transaction Count":[], "Transaction Amount":[]}
     top_transaction_pincode_dict = {"State":[], "Year":[],"Quarter":[],"Pincode":[], "Transaction Count":[], "Transaction Amount":[]}
@@ -340,8 +341,8 @@ def top_transaction():
         cursor.execute(sql, val)
         connection.commit()
 
-
-def top_user():
+# extract top user data and save to database
+def top_user(connection, cursor):
 
     top_user_district_dict = {"State":[], "Year":[],"Quarter":[],"District":[], "Registered Users":[]}
     top_user_pincode_dict = {"State":[], "Year":[],"Quarter":[],"Pincode":[], "Registered Users":[]}
@@ -431,7 +432,7 @@ def top_user():
         cursor.execute(sql, val)
         connection.commit()
 
-
+# delete existing data from the database
 def delete_sql_data(connection, cursor):
    
     cursor.execute("SHOW TABLES")
@@ -440,20 +441,20 @@ def delete_sql_data(connection, cursor):
         cursor.execute("SELECT * FROM {}".format(table[0]))
         results = cursor.fetchall()
         if len(results) > 0:
-            pprint(table[0])
             cursor.execute("DELETE FROM {}".format(table[0]))
             connection.commit()
 
 def extract_data(connection, cursor):
     
     delete_sql_data(connection, cursor)
-    aggregated_transaction()
-    aggregated_user()
-    transaction_map()
-    user_map()
-    top_transaction()
-    top_user()
+    aggregated_transaction(connection, cursor)
+    aggregated_user(connection, cursor)
+    transaction_map(connection, cursor)
+    user_map(connection, cursor)
+    top_transaction(connection, cursor)
+    top_user(connection, cursor)
 
+# create database tables
 def create_mysql_tables(cursor):
 
     cursor.execute("SHOW TABLES")
@@ -545,4 +546,5 @@ if __name__ == "__main__":
     
     create_mysql_tables(cursor)
 
+    # extract relevant data from the phonepe pulse repo
     extract_data(connection,cursor)
