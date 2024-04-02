@@ -1,7 +1,6 @@
 
 import os
 from pulse.data import *
-from pprint import pprint
 import json
 import pandas as pd
 import pymysql

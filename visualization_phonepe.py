@@ -259,7 +259,7 @@ if __name__ == "__main__":
         fig = px.pie(result_df, values="Transaction Amount", names="State", hover_data=["Transaction Amount"], hole=0.5, height=400, width=650)
         expander_4.write(fig)
 
-        expander_5 = col2.expander("5). Which transaction type have been done through Phonepe the most?")
+        expander_5 = col1.expander("5). Which transaction type have been done through Phonepe the most?")
         sql = "SELECT Transaction_Type, SUM(Transaction_Count) AS Transaction_Count FROM aggregated_transaction GROUP BY Transaction_Type ORDER BY Transaction_Count ASC"
         cursor.execute(sql)
         connection.commit()
@@ -270,7 +270,7 @@ if __name__ == "__main__":
         fig.update_traces(marker=dict(colors=colors))
         expander_5.write(fig)
 
-        expander_6 = col1.expander("6). Which quarter has the most number of transactions for each year?")
+        expander_6 = col2.expander("6). Which quarter has the most number of transactions for each year?")
         sql = "SELECT Year, Quarter, SUM(Transaction_Count) AS Transaction_Count FROM transaction_map GROUP BY Year, Quarter"
         cursor.execute(sql)
         connection.commit()
