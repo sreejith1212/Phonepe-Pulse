@@ -12,7 +12,7 @@ Building a live geo visualization dashboard from the Phonepe pulse Github reposi
 
 ## Usage
 1) To extract the phonepe pulse repo data, run command: "python extract_phonepe_data.py"
-2) To start the app, run command: "streamlit run visualization_phonepe.py.py"
+2) To start the app, run command: "streamlit run visualization_phonepe.py"
 3) To view the geo visualization and basic data info, go to "Explore" page.
 4) Get general insights about the extracted data in the "Q & A" section.
 
